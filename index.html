@@ -22,7 +22,43 @@
         }
 
         #dark-chess-canvas {
-            border: 1px dashed red;
+            border: 1px dashed oklch(55.234% 0.17731 33.334);
+        }
+
+        .fullscreen-toggle {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .fullscreen-toggle:hover {
+            color: oklch(55.234% 0.17731 33.334);
+        }
+
+        .fullscreen-toggle:active {
+            color: oklch(55.234% 0.17731 33.334);
+        }
+
+        #dark-chess-canvas-container:fullscreen .fullscreen-in {
+            display: none;
+        }
+
+        #dark-chess-canvas-container:fullscreen .fullscreen-exit {
+            display: inline;
+        }
+
+        #dark-chess-canvas-container:not(:fullscreen) .fullscreen-in {
+            display: inline;
+        }
+
+        #dark-chess-canvas-container:not(:fullscreen) .fullscreen-exit {
+            display: none;
         }
     </style>
     <script defer src="https://umami.blacktea1105.cc/oishii"
@@ -43,7 +79,29 @@
 
     <div id="dark-chess-canvas-container">
         <canvas id="dark-chess-canvas"></canvas>
+        <button class="fullscreen-toggle">
+            <svg class="fullscreen-in" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M5 5h5v2H7v3H5zm9 0h5v5h-2V7h-3zm3 9h2v5h-5v-2h3zm-7 3v2H5v-5h2v3z" />
+            </svg>
+            <svg class="fullscreen-exit" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M14 14h5v2h-3v3h-2zm-9 0h5v5H8v-3H5zm3-9h2v5H5V8h3zm11 3v2h-5V5h2v3z" />
+            </svg>
+        </button>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            document.querySelector(".fullscreen-toggle").addEventListener("click", (event) => {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    document.querySelector("#dark-chess-canvas-container").requestFullscreen();
+                }
+
+
+            });
+        });
+    </script>
 </body>
 
 </html>
